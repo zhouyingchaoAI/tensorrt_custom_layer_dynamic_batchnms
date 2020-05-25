@@ -25,5 +25,5 @@ $ docker cp libNMSPlugin.so trtserver:/opt/tensorrtserver/lib
 $ docker commit trtserver yingchao126/trtis_plugin:20.02-py3-trt-customlayer-dynamic-nms
 
 5. run the new triton-inference-server with custom layer batchnms_plugin
-$ docker run -it --rm --gpus device=0 --shm-size=4g --ulimit memlock=-1 --name trtserver1 --ulimit stack=67108864 -p8000:8000 -p8001:8001 -p8002:8002 -v /your-model-path/:/models -e LD_PRELOAD=/opt/tensorrtserver/lib/libNMSPlugin.so yingchao126/trtis_plugin:20.02-py3-trt-customlayer-dynamic-nms  trtserver --model-repository=/models --pinned-memory-pool-byte-size=0 --tf-gpu-memory-fraction=0.5 2>&1
+$ docker run -it --rm --gpus device=0 --shm-size=4g --ulimit memlock=-1 --name trtserver --ulimit stack=67108864 -p8000:8000 -p8001:8001 -p8002:8002 -v /your-model-path/:/models -e LD_PRELOAD=/opt/tensorrtserver/lib/libNMSPlugin.so yingchao126/trtis_plugin:20.02-py3-trt-customlayer-dynamic-nms  trtserver --model-repository=/models --pinned-memory-pool-byte-size=0 --tf-gpu-memory-fraction=0.5 2>&1
 ```
